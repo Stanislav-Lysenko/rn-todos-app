@@ -17,6 +17,10 @@ export default function App() {
     {id: 8, title: 'test8'}
   ]);
 
+  const removeTodo = id => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
+
   const addTodo = (title) => {
     // const newTodo = {
     //   id: Date.now().toString(),
@@ -45,7 +49,10 @@ export default function App() {
         <FlatList
           data={todos}
           renderItem={({item}) => (
-            <Todo todo={item} />
+            <Todo
+              todo={item}
+              onRemove={removeTodo}
+            />
           )}
           keyExtractor={item => item.id.toString()}
         >
@@ -66,9 +73,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 20,
     flex: 1
-
   },
   screen: {
-    height: '100%'
+    // height: '100%',
+    flex: 1
   }
 });
